@@ -35,6 +35,7 @@ let number = "731671765313306249192251196744265747423553491949349698352031277450
 let explode s => {
   let rec exp i l => {
     if (i < 0) { l }
+    /* again this horrible @ hack. how can I append to a list in Reason ?! */
     else { exp (i - 1) ([String.sub s i 1] @ l) }
   };
   exp ((String.length s) - 1) []
