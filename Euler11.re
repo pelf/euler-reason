@@ -67,10 +67,10 @@ let four_in_a_row v h dir => {
       let e = (List.nth (List.nth grid v) h);
       /* append element to l and make next call according to direction */
       switch dir {
-        | LeftRight     => { seq v (h+1) dir (l @ [e]); }
-        | UpDown        => { seq (v+1) h dir (l @ [e]); }
-        | DiagonalRight => { seq (v+1) (h+1) dir (l @ [e]); }
-        | DiagonalLeft  => { seq (v+1) (h-1) dir (l @ [e]); }
+        | LeftRight     => { seq v (h+1) dir ([e, ...l]); }
+        | UpDown        => { seq (v+1) h dir ([e, ...l]); }
+        | DiagonalRight => { seq (v+1) (h+1) dir ([e, ...l]); }
+        | DiagonalLeft  => { seq (v+1) (h-1) dir ([e, ...l]); }
       };
     };
   };

@@ -29,8 +29,8 @@ let square_of_sum = fun l =>
 let range a b => {
   let rec rr a b l => {
     if (b < a) { l }
-    /* how to append to a list? :: does not seem to work... */
-    else { rr a (b-1) ([b] @ l) }
+    /* thanks @ruiramos :) */
+    else { rr a (b-1) ([b, ...l]) }
   };
   rr a b [];
 };
