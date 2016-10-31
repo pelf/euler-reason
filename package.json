@@ -1,0 +1,35 @@
+{
+  "name": "euler-reason",
+  "version": "0.0.1",
+  "description": "Learn Reason/OCaml by solving Project Euler problems",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pelf/euler-reason.git"
+  },
+  "author": "pelf",
+  "license": "MIT",
+  "keywords": [
+    "reason"
+  ],
+  "scripts": {
+    "build": "eval $(dependencyEnv) && nopam && rebuild -I src ./src/$1.native 2>&1 | refmerr",
+    "start": "eval $(dependencyEnv) && ./_build/src/$1.native",
+
+    "clean": "eval $(dependencyEnv) && nopam && rebuild -clean",
+    "top": "eval $(dependencyEnv) && rtop",
+    "env": "eval $(dependencyEnv) && env",
+    "editor": "eval $(dependencyEnv) && eval $EDITOR",
+    "whereisocamlmerlin": "eval $(dependencyEnv) && which ocamlmerlin-reason"
+
+  },
+  "dependencies": {
+    "reason": "^ 1.4.0",
+    "@opam-alpha/merlin": "^ 2.5.0",
+    "@opam-alpha/ocaml": "4.2.3",
+    "nopam": "https://github.com/yunxing/nopam.git",
+    "dependency-env": "https://github.com/npm-ml/dependency-env.git"
+  },
+  "engines" : {
+    "npm" : ">=3.10.0"
+  }
+}
