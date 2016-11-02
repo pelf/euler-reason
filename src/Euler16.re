@@ -10,15 +10,17 @@ open Big_int;
 
 /* raise x to y-th power */
 let rec power x y => {
-  if (y == zero_big_int) { big_int_of_int 1 }
+  if (eq_big_int y zero_big_int) { big_int_of_int 1 }
   else { mult_big_int x (power x (pred_big_int y)) };
 };
 
 let sum_digits n => {
-  let rec sum n total =>
-    if (n < (big_int_of_int 10)) { add_big_int total n }
-    else { sum (div_big_int n (big_int_of_int 10)) (mod_big_int n (big_int_of_int 10)) };
-  sum n zero_big_int;
+  let ten = big_int_of_int 10;
+  let rec sum n => {
+    if (lt_big_int n ten) { n }
+    else { add_big_int (mod_big_int n ten) (sum (div_big_int n ten)) }
+  };
+  sum n;
 };
 
 print_string (string_of_big_int (sum_digits (power (big_int_of_int 2) (big_int_of_int 1_000))));
