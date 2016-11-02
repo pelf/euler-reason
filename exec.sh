@@ -1,3 +1,6 @@
+echo "Cleaning up..."
+rm ./_build/src/$1*
+
 eval $(./node_modules/.bin/dependencyEnv)
 nopam
 
