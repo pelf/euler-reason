@@ -5,7 +5,7 @@ eval $(./node_modules/.bin/dependencyEnv)
 nopam
 
 echo "Building..."
-rebuild -use-ocamlfind -I src ./src/$1.native 2>&1
+rebuild -use-ocamlfind -I src ./src/$1.native 2>&1 | refmterr
 
 echo "Running"...
 ./_build/src/$1.native 2>&1
