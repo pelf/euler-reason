@@ -14,18 +14,17 @@
   "scripts": {
     "build": "eval $(dependencyEnv) && nopam && rebuild -I src ./src/$1.native 2>&1 | refmerr",
     "start": "eval $(dependencyEnv) && ./_build/src/$1.native",
-
     "clean": "eval $(dependencyEnv) && nopam && rebuild -clean",
     "top": "eval $(dependencyEnv) && rtop",
     "env": "eval $(dependencyEnv) && env",
-    "editor": "eval $(dependencyEnv) && eval $EDITOR",
+    "editor": "eval $(dependencyEnv) && atom",
     "whereisocamlmerlin": "eval $(dependencyEnv) && which ocamlmerlin-reason"
-
   },
   "dependencies": {
     "reason": "^ 1.4.0",
     "@opam-alpha/merlin": "^ 2.5.0",
     "@opam-alpha/ocaml": "4.2.3",
+    "@opam-alpha/core_bench": "113.33.3",
     "nopam": "https://github.com/yunxing/nopam.git",
     "dependency-env": "https://github.com/npm-ml/dependency-env.git"
   },

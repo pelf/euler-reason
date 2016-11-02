@@ -1,0 +1,3 @@
+<node_modules>: -traverse
+true: package(core,ppx_jane)
+true: thread,debug
