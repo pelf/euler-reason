@@ -2,15 +2,16 @@ open Core.Std;
 open Big_int;
 open Util;
 
-print_endline (string_of_big_int (big_int_of_int 1));
-
 let primes = sieve(100);
-for i in 0 to 99 {
-  if (primes.(i)) {
-    print_int i; print_newline ();
-  }
-};
+assert ((Array.length primes) == 100);
+assert primes.(13);
+assert (not primes.(14));
 
-print_list (range 0 10) print_int;
+assert ((List.length (range 0 10)) == 11);
 
-print_list (explode "pelf") print_string;
+assert ((List.length (explode "pelf") == 4));
+
+let hash = BigIntHashtbl.create 100;
+assert (not (BigIntHashtbl.mem hash Big_int.unit_big_int));
+BigIntHashtbl.add hash Big_int.unit_big_int true;
+assert (BigIntHashtbl.mem hash Big_int.unit_big_int);

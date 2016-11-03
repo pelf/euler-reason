@@ -125,6 +125,17 @@ let digits n => {
   List.rev (dig n);
 };
 
+/* convert digit list back to nr */
+let digits_to_nr l => {
+  let rec to_n l exp => {
+    switch l {
+      | [] => { 0 }
+      | [hd, ...tl] => { (hd * (power 10 exp)) + (to_n tl (exp + 1)) }
+    }
+  };
+  to_n (List.rev l) 0;
+};
+
 /********************************************
   int helper functions
   */
@@ -210,6 +221,16 @@ let rec bi_power x y => {
   if (eq_big_int y zero_big_int) { big_int_of_int 1 }
   else { mult_big_int x (bi_power x (pred_big_int y)) };
 };
+
+/* Make use of the "functorial interface" to create a Big_int hashtable.
+   Check relevant section here: https://caml.inria.fr/pub/docs/manual-ocaml/libref/Hashtbl.html
+   */
+let module BigIntHash = {
+  type t = big_int;
+  let equal = eq_big_int;
+  let hash n => { Hashtbl.hash (int_of_big_int (mod_big_int n (big_int_of_int max_int))) };
+};
+let module BigIntHashtbl = Hashtbl.Make(BigIntHash);
 
 
 /*******************************************
