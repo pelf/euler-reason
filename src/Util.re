@@ -223,3 +223,24 @@ let explode s => {
   };
   exp 0;
 };
+
+
+/*******************************************
+  file helper functions
+  */
+
+let read_file filename => {
+  let lines = ref [];
+  let chan = open_in filename;
+  try {
+    while true {
+      lines := [(input_line chan), ... !lines];
+    };
+    !lines;
+  } { /* this is SUCH a weird syntax! took me a while to figure it out :| */
+    | End_of_file => {
+      close_in chan;
+      List.rev !lines;
+    };
+  };
+};
