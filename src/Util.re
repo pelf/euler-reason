@@ -131,8 +131,8 @@ let digits n => {
 
 /* raise x to y-th power */
 let rec power x y => {
-  if (eq_big_int y zero_big_int) { big_int_of_int 1 }
-  else { mult_big_int x (power x (pred_big_int y)) };
+  if (y==0) { 1 }
+  else { x * (power x (y-1)) }
 };
 
 let square n =>
@@ -203,6 +203,12 @@ let bi_sum_digits n => {
     else { add_big_int (mod_big_int n ten) (sum (div_big_int n ten)) }
   };
   sum n;
+};
+
+/* raise x to y-th power */
+let rec bi_power x y => {
+  if (eq_big_int y zero_big_int) { big_int_of_int 1 }
+  else { mult_big_int x (bi_power x (pred_big_int y)) };
 };
 
 
