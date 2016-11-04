@@ -80,7 +80,7 @@ let sieve limit => {
 };
 
 /* when we don't have an upper bound and need to
-   check a number individualy */
+   check a smallish number individualy */
 let is_prime n => {
   if (n <= 1) { false }
   else if (n < 4 ) { true }
@@ -95,6 +95,47 @@ let is_prime n => {
       else { prime_loop (d+2) }
     };
     prime_loop 5;
+  };
+};
+
+/* converts prime array into list of primes */
+let bool_array_to_list arr => {
+  let limit = Array.length arr;
+  let rec atol arr i => {
+    switch (i==limit) {
+      | true  => []
+      | false => switch arr.(i) {
+          | true => [i, ...(atol arr (i+1))] /* i is prime, append it to array */
+          | false => atol arr (i+1) /* i is not prime, keep going */
+      }
+    }
+  };
+  atol arr 0;
+};
+
+/* get list of primes up to n */
+let list_of_primes n => {
+  bool_array_to_list (sieve n)
+};
+
+/* we can combine the sieve and the loop together when dealing with really large bounded values.
+   we use the sieve to find prime factors to then check larger numbers with them.
+   WARNING: make sure the sieve finds a prime LARGER than sqrt(n) */
+let is_prime_with_sieve n prime_list => {
+  if (n <= 1) { false }
+  else {
+    let sqrt_n = int_of_float(sqrt(float_of_int(n)));
+    let rec prime_loop l => {
+      switch l {
+        | [] => { assert false }
+        | [d,...tl] => {
+          if (d > sqrt_n) { true }
+          else if ((n mod d) == 0) { false }
+          else { prime_loop tl }
+        };
+      };
+    };
+    prime_loop prime_list;
   };
 };
 
