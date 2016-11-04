@@ -19,7 +19,7 @@
 open Util;
 
 /*
-  On my first approach I simply brute forced it, which meant it took around 3.2 seconds to run.
+  1. On my first approach I simply brute forced it, which meant it took around 3.2 seconds to run.
   It could easily be optimized by memoizing the result for each number in case we saw them again.
 
   /* first approach. looked way cleaner, but it was slower. */
@@ -30,17 +30,26 @@ open Util;
     }
   };
 
-  Memoization resulted in a 3x speedup. The new version takes around 1s to finish.
+  2. Memoization resulted in a 3x speedup. The new version takes around 1s to finish.
 
   It could be way faster if I just did it arithmetically instead of generating lists of digits,
   but I'm lazy and just re-used functions I'd written before in Util.
+
+  3. Modified square_of_digits to do it arithmetically instead of using lists.
+     It now runs in 0.3s.
+
+     It could probably be optimized way more, but I can't be a**ed to figure it out...
 */
 
 /* biggest nr we can reach is when n=9_999_999 => 9^2 * 7 = 567 */
 let cache = Array.make 600 (None);
 
-let square_of_digits n => {
-  list_sum (List.map square (digits n))
+let rec square_of_digits n => {
+  if (n < 10) { n*n }
+  else {
+    let d = (n mod 10);
+    (d*d) + (square_of_digits (n/10));
+  }
 };
 
 let chain n => {
