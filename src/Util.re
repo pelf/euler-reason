@@ -2,6 +2,37 @@
 
 open Big_int;
 
+/********************************************
+  int helper functions
+  */
+
+/* raise x to y-th power */
+let rec power x y => {
+  if (y==0) { 1 }
+  else { x * (power x (y-1)) }
+};
+
+let square n =>
+  n * n;
+
+/* sum digits of n */
+let sum_digits n => {
+  let ten = big_int_of_int 10;
+  let rec sum n => {
+    if (lt_big_int n ten) { n }
+    else { add_big_int (mod_big_int n ten) (sum (div_big_int n ten)) }
+  };
+  sum n;
+};
+
+let rec factorial n => {
+  switch n {
+    | 0 | 1 => { 1 }
+    | _ => { n * (factorial (pred n)) }
+  }
+};
+
+
 /*******************************************
  prime helper functions
  */
@@ -66,6 +97,7 @@ let is_prime n => {
     prime_loop 5;
   };
 };
+
 
 /********************************************
   list helper functions
@@ -136,35 +168,6 @@ let digits_to_nr l => {
   to_n (List.rev l) 0;
 };
 
-/********************************************
-  int helper functions
-  */
-
-/* raise x to y-th power */
-let rec power x y => {
-  if (y==0) { 1 }
-  else { x * (power x (y-1)) }
-};
-
-let square n =>
-  n * n;
-
-/* sum digits of n */
-let sum_digits n => {
-  let ten = big_int_of_int 10;
-  let rec sum n => {
-    if (lt_big_int n ten) { n }
-    else { add_big_int (mod_big_int n ten) (sum (div_big_int n ten)) }
-  };
-  sum n;
-};
-
-let rec factorial n => {
-  switch n {
-    | 0 | 1 => { 1 }
-    | _ => { n * (factorial (pred n)) }
-  }
-};
 
 /********************************************
   divisor helper functions
@@ -218,8 +221,18 @@ let bi_sum_digits n => {
 
 /* raise x to y-th power */
 let rec bi_power x y => {
-  if (eq_big_int y zero_big_int) { big_int_of_int 1 }
+  if (eq_big_int y zero_big_int) { unit_big_int }
   else { mult_big_int x (bi_power x (pred_big_int y)) };
+};
+
+/* returns a list of the digits of big_int n */
+let bi_digits n => {
+  let ten = big_int_of_int 10;
+  let rec dig n => {
+    if (lt_big_int n ten) { [n] }
+    else { [(mod_big_int n ten), ...(dig (div_big_int n ten))] }
+  };
+  List.rev (dig n);
 };
 
 /* Make use of the "functorial interface" to create a Big_int hashtable.
