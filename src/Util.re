@@ -252,9 +252,39 @@ let sum_divisors n => {
   big int helper functions
   */
 
+/*
+  Make use of the "functorial interface" to create a Big_int hashtable.
+  Check relevant section here: https://caml.inria.fr/pub/docs/manual-ocaml/libref/Hashtbl.html
+*/
+let module BigIntHash = {
+  type t = big_int;
+  let equal = eq_big_int;
+  let hash n => { Hashtbl.hash (int_of_big_int (mod_big_int n (big_int_of_int max_int))) };
+};
+let module BigIntHashtbl = Hashtbl.Make(BigIntHash);
+
+/* big_int -> big_int */
 let rec bi_factorial n => {
-  if (eq_big_int unit_big_int n) { unit_big_int }
+  if (le_big_int n unit_big_int) { unit_big_int }
   else { mult_big_int n (bi_factorial (pred_big_int n)) }
+};
+
+/* int -> array int -> big_int */
+let factorial_with_cache n cache => {
+  let rec fact n => {
+    if (n <= 1) { unit_big_int }
+    else {
+      /* do we have this result cached? */
+      if (not (eq_big_int cache.(n) zero_big_int)) {
+        cache.(n);
+      } else {
+        let f = mult_big_int (big_int_of_int n) (fact (n-1));
+        cache.(n) = f; /* cache it! */
+        f; /* return it */
+      };
+    };
+  };
+  fact n;
 };
 
 let bi_sum_digits n => {
@@ -296,20 +326,11 @@ let bi_reverse n => {
 };
 
 
-/* Make use of the "functorial interface" to create a Big_int hashtable.
-   Check relevant section here: https://caml.inria.fr/pub/docs/manual-ocaml/libref/Hashtbl.html
-   */
-let module BigIntHash = {
-  type t = big_int;
-  let equal = eq_big_int;
-  let hash n => { Hashtbl.hash (int_of_big_int (mod_big_int n (big_int_of_int max_int))) };
-};
-let module BigIntHashtbl = Hashtbl.Make(BigIntHash);
-
 
 /*******************************************
   string helper functions
   */
+
 let explode s => {
   let length = String.length s;
   let rec exp i => {

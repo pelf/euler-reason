@@ -36,3 +36,8 @@ assert (eq_big_int (bi_reverse (big_int_of_int 0)) (big_int_of_int 0));
 assert (eq_big_int (bi_reverse (big_int_of_int 1)) (big_int_of_int 1));
 assert (eq_big_int (bi_reverse (big_int_of_int 1234567)) (big_int_of_int 7654321));
 assert (eq_big_int (bi_reverse (big_int_of_int 9321)) (big_int_of_int 1239));
+
+/* test factorials */
+let cache = Array.create 101 zero_big_int;
+assert (eq_big_int (bi_factorial (big_int_of_int 100)) (big_int_of_int 3628800));
+assert (eq_big_int (big_int_of_int 3628800) (factorial_with_cache 100 cache));
