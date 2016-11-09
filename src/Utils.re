@@ -297,9 +297,12 @@ let bi_sum_digits n => {
 };
 
 /* raise x to y-th power */
-let rec bi_power x y => {
-  if (eq_big_int y zero_big_int) { unit_big_int }
-  else { mult_big_int x (bi_power x (pred_big_int y)) };
+let bi_power x y => {
+  let rec pow x y res => {
+    if (eq_big_int y zero_big_int) { res }
+    else { pow x (pred_big_int y) (mult_big_int x res) };
+  };
+  pow x y unit_big_int;
 };
 
 /* returns a list of the digits of big_int n */
@@ -359,4 +362,9 @@ let read_file filename => {
       List.rev !lines;
     };
   };
+};
+
+/* read 1-line text file */
+let read_line_from_file filename => {
+  List.hd (read_file filename)
 };

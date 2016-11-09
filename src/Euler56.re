@@ -9,7 +9,7 @@
   Considering natural numbers of the form, a^b, where a, b < 100, what is the maximum digital sum?
 */
 open Big_int;
-open Util;
+open Utils;
 
 let limit = 99;
 let max = ref 0;

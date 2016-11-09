@@ -16,7 +16,7 @@
   a 15K text file containing a triangle with one-hundred rows.
 */
 
-open Util;
+open Utils;
 open Core.Std;
 open Euler18Pyramid;
 

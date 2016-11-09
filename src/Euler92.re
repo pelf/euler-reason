@@ -16,7 +16,7 @@
   How many starting numbers below ten million will arrive at 89?
 */
 
-open Util;
+open Utils;
 
 /*
   1. On my first approach I simply brute forced it, which meant it took around 3.2 seconds to run.

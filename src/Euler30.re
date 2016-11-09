@@ -14,7 +14,7 @@
   Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 */
 
-open Util;
+open Utils;
 
 /* 9^5 * 7 < 1_000_000, so we can use 6 digit numbers as an upper bound */
 let limit = 1_000_000;

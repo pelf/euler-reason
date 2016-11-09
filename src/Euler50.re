@@ -13,7 +13,7 @@
   Which prime, below one-million, can be written as the sum of the most consecutive primes?
 */
 
-open Util;
+open Utils;
 
 let limit = 1_000_000;
 

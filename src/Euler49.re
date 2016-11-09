@@ -13,7 +13,7 @@
   What 12-digit number do you form by concatenating the three terms in this sequence?
 */
 
-open Util;
+open Utils;
 
 let limit = 9_999;
 let hash = Hashtbl.create limit;

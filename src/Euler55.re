@@ -27,7 +27,7 @@
   How many Lychrel numbers are there below ten-thousand?
 */
 
-open Util;
+open Utils;
 open Big_int;
 
 let limit = 10_000;

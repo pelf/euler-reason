@@ -8,7 +8,7 @@
   What is the largest n-digit pandigital prime that exists?
 */
 
-open Util;
+open Utils;
 
 /* 1. Started with a brute force approach to check if it worked.
       With limit = 1_000_000_000 takes ~3min to run... ouch!

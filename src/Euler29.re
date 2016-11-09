@@ -18,7 +18,7 @@
 */
 
 open Big_int;
-open Util;
+open Utils;
 
 let limit = 100;
 let uniq = BigIntHashtbl.create (limit*limit);

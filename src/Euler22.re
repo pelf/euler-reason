@@ -15,7 +15,7 @@
   What is the total of all the name scores in the file?
 */
 
-open Util;
+open Utils;
 open Core.Std;
 
 /* read 1-line text file */

@@ -1,6 +1,6 @@
 open Core.Std;
 open Big_int;
-open Util;
+open Utils;
 
 /* check if it's finding primes correctly */
 let primes = sieve(100);

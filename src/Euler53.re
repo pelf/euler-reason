@@ -35,7 +35,7 @@
 */
 
 open Big_int;
-open Util;
+open Utils;
 
 let limit = 100;
 let cache = Array.make (limit+1) zero_big_int;
