@@ -30,3 +30,9 @@ let hash = BigIntHashtbl.create 100;
 assert (not (BigIntHashtbl.mem hash Big_int.unit_big_int));
 BigIntHashtbl.add hash Big_int.unit_big_int true;
 assert (BigIntHashtbl.mem hash Big_int.unit_big_int);
+
+/* test bi reverse */
+assert (eq_big_int (bi_reverse (big_int_of_int 0)) (big_int_of_int 0));
+assert (eq_big_int (bi_reverse (big_int_of_int 1)) (big_int_of_int 1));
+assert (eq_big_int (bi_reverse (big_int_of_int 1234567)) (big_int_of_int 7654321));
+assert (eq_big_int (bi_reverse (big_int_of_int 9321)) (big_int_of_int 1239));

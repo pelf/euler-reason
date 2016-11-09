@@ -189,6 +189,12 @@ let rec equals l1 l2 => {
   };
 };
 
+/* check if the given list is a palindrome */
+let is_palindrome l => {
+  /* checks if l equals reverse l */
+  equals l (List.rev l);
+};
+
 /* returns a list of the digits of n */
 let digits n => {
   let rec dig n => {
@@ -275,6 +281,20 @@ let bi_digits n => {
   };
   List.rev (dig n);
 };
+
+/* reverses given number: 923 -> 329 */
+let bi_reverse n => {
+  let ten = big_int_of_int 10;
+  let rec rev n rev_n => {
+    if (eq_big_int n zero_big_int) { rev_n }
+    else {
+      /* multiply rev_n by 10 (shift it left) and add current digit */
+      mult_big_int rev_n ten |> add_big_int (mod_big_int n ten) |> rev (div_big_int n ten);
+    }
+  };
+  rev n zero_big_int;
+};
+
 
 /* Make use of the "functorial interface" to create a Big_int hashtable.
    Check relevant section here: https://caml.inria.fr/pub/docs/manual-ocaml/libref/Hashtbl.html
