@@ -1,7 +1,7 @@
 /*
   Lychrel numbers
   Problem 55
-  
+
   If we take 47, reverse and add, 47 + 74 = 121, which is palindromic.
 
   Not all numbers produce palindromes so quickly. For example,
@@ -41,7 +41,7 @@ let is_lychrel n => {
         /* reverse and add */
         let sum = bi_reverse bi |> add_big_int bi;
         /* get list of int digits */
-        let int_digits = List.map (fun e => (int_of_big_int e)) (bi_digits sum);
+        let int_digits = bi_digits sum;
         /* check if it's a palindrome */
         switch (is_palindrome int_digits) {
           | true => false /* it's not a lychrel */

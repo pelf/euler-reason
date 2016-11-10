@@ -309,8 +309,8 @@ let bi_power x y => {
 let bi_digits n => {
   let ten = big_int_of_int 10;
   let rec dig n => {
-    if (lt_big_int n ten) { [n] }
-    else { [(mod_big_int n ten), ...(dig (div_big_int n ten))] }
+    if (lt_big_int n ten) { [(int_of_big_int n)] }
+    else { [(int_of_big_int (mod_big_int n ten)), ...(dig (div_big_int n ten))] }
   };
   List.rev (dig n);
 };
