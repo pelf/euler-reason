@@ -17,7 +17,7 @@
     "clean": "eval $(dependencyEnv) && nopam && rebuild -clean",
     "top": "eval $(dependencyEnv) && rtop",
     "env": "eval $(dependencyEnv) && env",
-    "editor": "eval $(dependencyEnv) && atom",
+    "editor": "eval $(dependencyEnv) && atom .",
     "whereisocamlmerlin": "eval $(dependencyEnv) && which ocamlmerlin-reason"
   },
   "dependencies": {
