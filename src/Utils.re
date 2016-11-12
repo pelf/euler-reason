@@ -139,6 +139,22 @@ let is_prime_with_sieve n prime_list => {
   };
 };
 
+/********************************************
+  int helper functions
+  */
+
+/* reverses given number: 923 -> 329 */
+let reverse n => {
+  let rec rev n rev_n => {
+    if (n == 0) { rev_n }
+    else {
+      /* multiply rev_n by 10 (shift it left) and add current digit */
+      rev_n * 10 + (n mod 10) |> rev (n / 10);
+    }
+  };
+  rev n 0;
+};
+
 
 /********************************************
   list helper functions
